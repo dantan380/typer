@@ -5,7 +5,7 @@
   let game: Game = 'waiting for input'
   let typedLetter = ' '
 
-  let words: Word[] = "the quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog".split(' ')
+  let words: Word[] = "the quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog ".split(' ')
   let wordIndex = 0
   let letterIndex = 0
   let correctLetters = 0
@@ -26,6 +26,7 @@
     setLetter()
     checkLetter()
     nextLetter()
+    updateLine()
     resetLetter()
   }
 
@@ -36,6 +37,16 @@
       letterEl = wordsEl.children[wordIndex].children[letterIndex] as HTMLSpanElement
     } else {
       letterEl = null;
+    }
+  }
+
+  function updateLine() {
+    const wordEl = wordsEl.children[wordIndex]
+    const wordsY = wordsEl.getBoundingClientRect().y
+    const wordY = wordEl.getBoundingClientRect().y
+
+    if (wordY > wordsY) {
+      wordEl.scrollIntoView({ block: 'center'})
     }
   }
 
