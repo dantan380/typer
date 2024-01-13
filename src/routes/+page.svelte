@@ -39,6 +39,17 @@
     }
   }
 
+  function nextWord() {
+    const isNotFirstLetter = letterIndex !== 0
+    const isOneLetterWord = words[wordIndex].length === 1
+
+    if (isNotFirstLetter || isOneLetterWord) {
+      wordIndex += 1
+      letterIndex = 0
+      increaseScore()
+    }
+  }
+
   function checkLetter() {
     if (letterEl) {
       const currentLetter = words[wordIndex][letterIndex]
@@ -73,6 +84,10 @@
   function handleKeydown(event: KeyboardEvent){
     if (event.code === 'Space') {
       event.preventDefault()
+
+      if (game === 'in progress') {
+        nextWord()
+      }
     }
 
     if (game === 'waiting for input') {
